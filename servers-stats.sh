@@ -30,3 +30,6 @@ cpu_usage=$(awk "BEGIN {printf \"%.1f\", (100*($total_diff-$idle_diff))/$total_d
 read -r mem_total mem_used mem_free < <(free -m | awk 'NR==2 {print $2, $3, $4}')
 mem_pct=$(awk "BEGIN {printf \"%.1f\", ($mem_used/$mem_total)*100}")
 
+read -r disk_total disk_used disk_free disk_pct < <(df -h --total | awk '/^total/ {print $2, $3, $4, $5}'
+)
+
