@@ -36,4 +36,8 @@ read -r disk_total disk_used disk_free disk_pct < <(df -h --total | awk '/^total
 ps -eo pid,user,comm,%cpu --sort=-%cpu | head -n 6
 ps -eo pid,user,comm,%mem --sort=-%mem | head -n 6
 
+os_name=$(awk -F= '/^PRETTY_NAME=/ {gsub(/"","",$2); print $2}' /etc/os-release)
+echo "Uptime: $(uptime -p 2>/dev/null || uptime)"
+echo "Load average: $(cut -d'' -f1-3 /proc/loadavg)"
+echo "Zalogowani: $(who | wc -l)"
 
