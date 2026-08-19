@@ -33,3 +33,7 @@ mem_pct=$(awk "BEGIN {printf \"%.1f\", ($mem_used/$mem_total)*100}")
 read -r disk_total disk_used disk_free disk_pct < <(df -h --total | awk '/^total/ {print $2, $3, $4, $5}'
 )
 
+ps -eo pid,user,comm,%cpu --sort=-%cpu | head -n 6
+ps -eo pid,user,comm,%mem --sort=-%mem | head -n 6
+
+
