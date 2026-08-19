@@ -27,4 +27,6 @@ total_diff=$((total2 - total1))
 idle_diff=((idle2 - idle1))
 cpu_usage=$(awk "BEGIN {printf \"%.1f\", (100*($total_diff-$idle_diff))/$total_diff}")
 
+read -r mem_total mem_used mem_free < <(free -m | awk 'NR==2 {print $2, $3, $4}')
+mem_pct=$(awk "BEGIN {printf \"%.1f\", ($mem_used/$mem_total)*100}")
 
